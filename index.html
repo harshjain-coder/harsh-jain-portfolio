@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Harsh Jain — Junior Python Backend Developer portfolio." />
+  <title>Harsh Jain | Junior Python Backend Developer</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07060d;
+      --bg-soft: #0d0b17;
+      --card: rgba(18, 15, 31, 0.76);
+      --card-2: #11101c;
+      --text: #f7f5ff;
+      --muted: #aaa5ba;
+      --line: rgba(255,255,255,.09);
+      --purple: #8b5cf6;
+      --purple-2: #a855f7;
+      --cyan: #67e8f9;
+      --green: #34d399;
+      --orange: #fb923c;
+      --pink: #f472b6;
+      --shadow: 0 25px 80px rgba(0,0,0,.42);
+      --radius: 24px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 78% 8%, rgba(139,92,246,.17), transparent 26%),
+        radial-gradient(circle at 12% 30%, rgba(103,232,249,.06), transparent 24%),
+        var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    ::selection { background: rgba(139,92,246,.35); }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .hello { display: block; font-size: .42em; letter-spacing: -.025em; color: #a8a3b2; font-weight: 500; margin-bottom: 10px; }
+    .section { padding: 105px 0; position: relative; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid rgba(139,92,246,.32);
+      border-radius: 999px;
+      color: #d7c8ff;
+      background: rgba(139,92,246,.08);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(52,211,153,.9);
+    }
+    .no-dot::before { display:none; }
+    .live-status {
+      position: relative;
+      overflow: visible;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+    .live-status::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid rgba(52,211,153,.55);
+      transform: translate(-50%,-50%) scale(1);
+      animation: liveRing 1.8s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes liveRing {
+      0% { transform: translate(-50%,-50%) scale(1); opacity:.75; }
+      100% { transform: translate(-50%,-50%) scale(4.2); opacity:0; }
+    }
+    @keyframes statusPulse {
+      0%,100% { box-shadow: 0 0 0 rgba(52,211,153,0); }
+      50% { box-shadow: 0 0 22px rgba(52,211,153,.08); }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(7,6,13,.62);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple), #5b21b6);
+      box-shadow: 0 8px 28px rgba(139,92,246,.28);
+      font-size: 14px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: #aaa6b7;
+      font-size: 13px;
+      transition: .25s ease;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      padding: 10px 15px !important;
+      border-radius: 10px;
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      box-shadow: 0 8px 25px rgba(139,92,246,.22);
+    }
+    .menu-btn { display: none; border: 0; background: transparent; color: white; font-size: 23px; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 135px 0 80px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -0.055em;
+      margin: 23px 0 18px;
+    }
+    .hero h1 .accent {
+      display: block;
+      background: linear-gradient(90deg, #a78bfa, #c084fc, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero h2 {
+      font-size: 19px;
+      color: #ddd8e8;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 17px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 13px;
+      transition: .25s ease;
+    }
+    .btn-primary {
+      border: 0;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      box-shadow: 0 12px 30px rgba(139,92,246,.25);
+    }
+    .btn-secondary { background: rgba(255,255,255,.03); color: #d9d5e4; }
+    .btn:hover { transform: translateY(-2px); }
+    .socials { display: flex; gap: 9px; margin-top: 17px; }
+    .social {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: #c6c0d3;
+      font-size: 12px;
+      font-weight: 800;
+      background: rgba(255,255,255,.025);
+    }
+
+    .terminal-wrap { position: relative; }
+    .glow {
+      position: absolute;
+      width: 310px;
+      height: 310px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(139,92,246,.18);
+      filter: blur(80px);
+      border-radius: 50%;
+    }
+    .terminal {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(26,22,43,.9), rgba(10,9,17,.94));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .terminal-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #5b5567; }
+    .terminal-title { margin-left: 7px; color: #858091; font-size: 11px; }
+    .terminal-body { padding: 25px; min-height: 330px; font: 13px/2.0 ui-monospace, SFMono-Regular, Menlo, monospace; color: #bdb7ca; }
+    .code-key { color: #c084fc; }
+    .code-string { color: #67e8f9; }
+    .code-green { color: #86efac; }
+    .code-dim { color: #706a7b; }
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 15px;
+      background: #a78bfa;
+      vertical-align: -2px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* SECTION TITLES */
+    .section-head { margin-bottom: 44px; }
+    .section-head h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -.045em;
+      margin-top: 15px;
+    }
+    .section-head p { color: var(--muted); max-width: 650px; margin-top: 12px; }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 25px;
+    }
+    .about-card, .stat-card, .skill-card, .project-card, .contact-card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0,0,0,.18);
+    }
+    .about-card { padding: 30px; }
+    .about-card h3 { font-size: 22px; margin-bottom: 10px; }
+    .about-card p { color: var(--muted); font-size: 14px; }
+    .mini-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip {
+      padding: 7px 10px;
+      border-radius: 8px;
+      background: rgba(139,92,246,.08);
+      border: 1px solid rgba(139,92,246,.20);
+      color: #d2c5f8;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .stat-card { padding: 25px; min-height: 150px; }
+    .stat-num {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 35px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .stat-label { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .stat-line { width: 44px; height: 2px; background: var(--purple); margin-top: 17px; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .skill-card { padding: 22px; }
+    .skill-card h3 { font-size: 15px; margin-bottom: 6px; }
+    .skill-card p { font-size: 12px; color: var(--muted); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .project-card { overflow: hidden; transition: .3s ease; }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,.35); }
+    .project-visual {
+      min-height: 250px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(139,92,246,.22), transparent 30%),
+        #0b0912;
+      border-bottom: 1px solid var(--line);
+    }
+    .visual-label {
+      position: absolute; top: 16px; right: 17px;
+      font-size: 10px; color: #aaa2b9; padding: 5px 8px;
+      border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.22);
+    }
+    .project-content { padding: 24px; }
+    .project-top { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+    .project-top h3 { font-size: 21px; font-family: "Space Grotesk", sans-serif; }
+    .project-type { color: #9e96ab; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; margin-top: 4px; }
+    .project-content > p { color: var(--muted); font-size: 13px; margin: 14px 0; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 17px; }
+    .tag { font-size: 10px; color: #c9c2d7; background: rgba(255,255,255,.045); border: 1px solid var(--line); padding: 5px 8px; border-radius: 7px; }
+    .project-links { display: flex; gap: 9px; }
+    .small-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px;
+      border-radius: 8px; border: 1px solid var(--line); font-size: 11px; font-weight: 700;
+    }
+    .small-btn.primary { background: rgba(139,92,246,.12); border-color: rgba(139,92,246,.25); color: #d7c8ff; }
+
+    /* VISUAL 1: JOB PORTAL */
+    .browser {
+      width: 100%; max-width: 455px; margin: 18px auto 0;
+      border: 1px solid rgba(255,255,255,.10); border-radius: 13px;
+      background: #0f0d18; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
+    .browser-head { padding: 9px 11px; display:flex; gap:5px; border-bottom:1px solid var(--line); }
+    .browser-head i { width:6px; height:6px; border-radius:50%; background:#4b4653; }
+    .job-row { display:grid; grid-template-columns: 1fr 72px; gap: 12px; padding: 14px; border-bottom: 1px solid rgba(255,255,255,.05); }
+    .job-title { height: 8px; width: 55%; border-radius: 4px; background: #d9d2e8; opacity:.85; }
+    .job-company { height: 6px; width: 35%; border-radius: 4px; background: #595266; margin-top: 8px; }
+    .job-pill { height: 22px; border-radius: 6px; background: rgba(139,92,246,.22); border: 1px solid rgba(139,92,246,.24); }
+
+    /* VISUAL 2: SOCIAL */
+    .phone {
+      width: 170px; height: 220px; border: 5px solid #211c31; border-radius: 22px;
+      margin: 8px auto 0; background: #0f0c17; box-shadow: 0 15px 45px rgba(0,0,0,.4);
+      overflow: hidden;
+    }
+    .phone-top { height: 27px; background:#161124; border-bottom:1px solid var(--line); }
+    .feed { padding: 10px; }
+    .avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,#8b5cf6,#67e8f9); display:inline-block; vertical-align:middle; }
+    .feed-line { display:inline-block; width:70px; height:6px; border-radius:3px; background:#777081; margin-left:6px; }
+    .post-img { height: 78px; border-radius: 9px; margin-top: 10px; background: linear-gradient(135deg, rgba(139,92,246,.75), rgba(67,56,202,.15)); }
+    .feed-actions { display:flex; gap:7px; margin-top:8px; }
+    .action-dot { width:25px; height:6px; border-radius:3px; background:#494252; }
+
+    /* VISUAL 3: EXPENSE */
+    .dashboard { max-width: 450px; margin: 18px auto 0; display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .dash-box { border:1px solid var(--line); background:rgba(255,255,255,.025); border-radius:11px; padding:12px; }
+    .dash-box.wide { grid-column: 1 / -1; }
+    .dash-number { width:62%; height:12px; border-radius:5px; background:#eee9f8; margin-top:5px; }
+    .bars { height:90px; display:flex; align-items:end; gap:7px; padding-top:15px; }
+    .bar { flex:1; border-radius:5px 5px 2px 2px; background:linear-gradient(to top, rgba(139,92,246,.35), rgba(139,92,246,.9)); }
+    .bar:nth-child(1){height:42%}.bar:nth-child(2){height:65%}.bar:nth-child(3){height:51%}.bar:nth-child(4){height:82%}.bar:nth-child(5){height:60%}.bar:nth-child(6){height:90%}.bar:nth-child(7){height:73%}
+
+    /* VISUAL 4: TASK */
+    .kanban { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; max-width:450px; margin:20px auto 0; }
+    .kanban-col { padding:8px; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.025); min-height:160px; }
+    .kanban-head { height:7px; width:45%; background:#a7a0b1; border-radius:3px; margin-bottom:9px; }
+    .task { padding:9px; margin-bottom:7px; border-radius:7px; border:1px solid rgba(255,255,255,.06); background:#151220; }
+    .task i { display:block; height:5px; width:80%; background:#625a6c; border-radius:3px; }
+    .task b { display:block; height:4px; width:52%; background:#393342; border-radius:3px; margin-top:6px; }
+
+    /* CONTACT */
+    .contact-card {
+      padding: 45px;
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 35px;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(139,92,246,.18), transparent 35%),
+        rgba(18,15,31,.82);
+    }
+    .contact-card h2 {
+      font-family:"Space Grotesk",sans-serif; font-size: clamp(30px,4vw,48px);
+      line-height:1.05; letter-spacing:-.045em;
+    }
+    .contact-card p { color: var(--muted); margin: 14px 0 24px; max-width: 600px; }
+    .contact-list { display:grid; gap:11px; align-content:center; }
+    .contact-item { display:flex; align-items:center; gap:12px; padding:13px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.025); }
+    .contact-icon { width:32px; height:32px; display:grid; place-items:center; border-radius:9px; background:rgba(139,92,246,.13); color:#c4b5fd; font-size:11px; font-weight:800; }
+    .contact-item span { color:#c8c2d2; font-size:12px; word-break:break-word; }
+
+    footer { padding: 30px 0 42px; color:#777182; font-size:12px; text-align:center; border-top:1px solid rgba(255,255,255,.05); }
+
+    /* reveal */
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .contact-card { grid-template-columns: 1fr; }
+      .hero { padding-top: 115px; }
+      .terminal-wrap { max-width: 620px; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .nav-links {
+        display:none; position:absolute; top:72px; left:14px; right:14px;
+        flex-direction:column; align-items:stretch; padding:16px;
+        border:1px solid var(--line); border-radius:15px; background:#0d0b16;
+      }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:8px 4px; }
+      .menu-btn { display:block; }
+      .hero h1 { font-size: 52px; }
+      .stats { grid-template-columns:1fr 1fr; }
+      .skills-grid { grid-template-columns:1fr 1fr; }
+      .contact-card { padding:28px 22px; }
+      .project-visual { min-height:225px; }
+      .section { padding:80px 0; }
+    }
+
+    @media (max-width: 430px) {
+      .skills-grid, .stats { grid-template-columns:1fr; }
+      .hero h1 { font-size: 45px; }
+      .hero-actions .btn { width:100%; }
+      .project-links .small-btn { flex:1; justify-content:center; }
+    }
+  </style>
+
+<style id="portfolio-update-css">
+.live-status{position:relative;display:inline-flex;align-items:center;gap:.55rem}
+.live-status::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#39d353;flex:0 0 auto;animation:liveDotMove 1.5s ease-in-out infinite}
+.live-status::after{content:"";position:absolute;left:.24rem;top:50%;width:.48rem;height:.48rem;border-radius:50%;border:1px solid rgba(57,211,83,.8);transform:translate(-50%,-50%);animation:liveDotPopup 1.5s ease-out infinite;pointer-events:none}
+@keyframes liveDotMove{0%,100%{transform:translateY(0) scale(1);box-shadow:0 0 0 0 rgba(57,211,83,.55)}25%{transform:translateY(-2px) scale(1.12);box-shadow:0 0 0 3px rgba(57,211,83,.12)}50%{transform:translateY(1px) scale(.94);box-shadow:0 0 0 5px rgba(57,211,83,.06)}75%{transform:translateY(-1px) scale(1.05)}}
+@keyframes liveDotPopup{0%{transform:translate(-50%,-50%) scale(1);opacity:.9}70%,100%{transform:translate(-50%,-50%) scale(2.8);opacity:0}}
+.name{white-space:nowrap}
+.no-section-dot::before{display:none!important;content:none!important}
+</style>
+
+
+<style id="portfolio-remove-rules">
+.backend-projects::after,.primary-backend-language::after,.core-web-framework::after,.education-btech::after,
+.backend-projects hr,.primary-backend-language hr,.core-web-framework hr,.education-btech hr{display:none!important;content:none!important}
+</style>
+
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>Harsh Jain</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="nav-cta">Let's Connect</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow live-status">Open to opportunities</span>
+
+          <h1><span class="hello">Hello, I am</span><span class="name"><span class="accent">Harsh Jain</span></span></h1>
+
+          <h2>Junior Python Backend Developer</h2>
+
+          <p>
+            I build practical backend systems with Python, Django and Django REST Framework,
+            focusing on secure APIs, clean data models and reliable application logic.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work →</a>
+            <!-- Put your PDF in the same folder and keep this filename -->
+            <a class="btn btn-secondary" href="Harsh_Jain_Resume.pdf" target="_blank">View Resume ↗</a>
+          </div>
+
+          <div class="socials">
+            <a class="social" href="https://github.com/harshjain-coder" target="_blank" aria-label="GitHub">GH</a>
+            <a class="social" href="https://linkedin.com/in/harshjain1403" target="_blank" aria-label="LinkedIn">in</a>
+            <a class="social" href="mailto:harshjain1403@gmail.com" aria-label="Email">@</a>
+          </div>
+        </div>
+
+        <div class="terminal-wrap reveal">
+          <div class="glow"></div>
+          <div class="terminal">
+            <div class="terminal-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="terminal-title">backend_profile.py</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="code-key">class</span> Developer:</div>
+              <div>&nbsp;&nbsp;name = <span class="code-string">"Harsh Jain"</span></div>
+              <div>&nbsp;&nbsp;role = <span class="code-string">"Backend Developer"</span></div>
+              <div>&nbsp;&nbsp;location = <span class="code-string">"Delhi, India"</span></div>
+              <br>
+              <div>&nbsp;&nbsp;stack = [</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"DRF"</span>, <span class="code-string">"MySQL"</span>,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"JWT"</span></div>
+              <div>&nbsp;&nbsp;]</div>
+              <br>
+              <div>&nbsp;&nbsp;<span class="code-key">def</span> build():</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">return</span> <span class="code-green">"secure & useful APIs"</span></div>
+              <br>
+              <div class="code-dim"># ready to build →</div>
+              <span class="cursor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow no-dot">A little about me</span>
+          <h2>Building useful backend systems.</h2>
+          <p>
+            Computer Science graduate focused on Python backend development, REST APIs and clean application logic.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <h3>My approach</h3>
+            <p>
+              I focus on clear Django models, secure APIs, authentication, validation and practical testing.
+            </p>
+
+            <div class="mini-stack">
+              <span class="chip">REST APIs</span>
+              <span class="chip">JWT Auth</span>
+              <span class="chip">Django ORM</span>
+              <span class="chip">SQL</span>
+              <span class="chip">API Testing</span>
+              <span class="chip">Git</span>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card reveal">
+              <div class="stat-num">4</div>
+              <div class="stat-label">Backend projects</div>
+              <div class="stat-line"></div>
+            </div>
+            <div class="stat-card reveal">
+              <div class="stat-num">Python</div>
+              <div class="stat-label">Primary backend language</div>
+              <div class="stat-line"></div>
+            </div>
+            <div class="stat-card reveal">
+              <div class="stat-num">Django</div>
+              <div class="stat-label">Core web framework</div>
+              <div class="stat-line"></div>
+            </div>
+            <div class="stat-card reveal">
+              <div class="stat-num">B.Tech</div>
+              <div class="stat-label">Computer Science • 2021–2025</div>
+              <div class="stat-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow no-section-dot">Tech stack</span>
+          <h2>Tools I work with.</h2>
+          <p>A focused backend stack built around
+Python,
+Django and API development.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <h3>Python</h3>
+            <p>Core programming, OOP and backend application logic.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>Django</h3>
+            <p>Models,
+Authentication, ORM, views and application structure.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>
+DRF</h3>
+            <p>REST API design, serializers, permissions and CRUD workflows.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>
+Databases</h3>
+            <p>MySQL and PostgreSQL with relational data modeling.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>Authentication</h3>
+            <p>JWT-based login, protected endpoints and role-based access.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>
+Git & GitHub</h3>
+            <p>Version control, repositories and project collaboration basics.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>
+Postman</h3>
+            <p>API testing, debugging and request/response validation.</p>
+          </div>
+          <div class="skill-card reveal">
+            <h3>
+CS Fundamentals</h3>
+            <p>OOP, DBMS, data structures, algorithms and networking basics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow no-section-dot">Selected work</span>
+          <h2>Projects I’ve built.</h2>
+          <p>
+            Four backend projects that demonstrate API design, authentication, database modeling,
+            CRUD operations, filtering and deployment.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- PROJECT 1 -->
+          <article class="project-card reveal">
+            <div class="project-visual">
+              <span class="visual-label">JOB PORTAL API</span>
+              <div class="browser">
+                <div class="browser-head"><i></i><i></i><i></i></div>
+                <div class="job-row">
+                  <div><div class="job-title"></div><div class="job-company"></div></div>
+                  <div class="job-pill"></div>
+                </div>
+                <div class="job-row">
+                  <div><div class="job-title" style="width:70%"></div><div class="job-company" style="width:43%"></div></div>
+                  <div class="job-pill"></div>
+                </div>
+                <div class="job-row">
+                  <div><div class="job-title" style="width:48%"></div><div class="job-company"></div></div>
+                  <div class="job-pill"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-top">
+                <div>
+                  <h3>Job Portal</h3>
+                  <div class="project-type">Backend API</div>
+                </div>
+              </div>
+              <p>
+                RESTful job platform API with separate Recruiter and Candidate roles,
+                secure authentication and recruiter-only authorization.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Django</span><span class="tag">DRF</span>
+                <span class="tag">MySQL</span><span class="tag">JWT</span>
+              </div>
+              <div class="project-links">
+                <a class="small-btn primary" href="https://github.com/harshjain-coder/Job-Portal-Backend-API" target="_blank">GitHub ↗</a>
+                <!-- Replace # with your deployed API URL -->
+                <a class="small-btn" href="https://job-portal-backend-api-vlr7.onrender.com/api/jobs/" target="_blank" rel="noopener">Live API ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2 -->
+          <article class="project-card reveal">
+            <div class="project-visual">
+              <span class="visual-label">SOCIAL SPHERE API</span>
+              <div class="phone">
+                <div class="phone-top"></div>
+                <div class="feed">
+                  <span class="avatar"></span><span class="feed-line"></span>
+                  <div class="post-img"></div>
+                  <div class="feed-actions"><span class="action-dot"></span><span class="action-dot"></span><span class="action-dot"></span></div>
+                  <div class="post-img" style="height:50px; margin-top:12px; opacity:.55"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-top">
+                <div>
+                  <h3>Social Sphere</h3>
+                  <div class="project-type">Social Media Backend</div>
+                </div>
+              </div>
+              <p>
+                Social media backend for profiles, posts, comments, likes and saved posts,
+                with multiple post types and protected API access.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Django</span><span class="tag">DRF</span>
+                <span class="tag">MySQL</span><span class="tag">JWT</span>
+              </div>
+              <div class="project-links">
+                <a class="small-btn primary" href="https://github.com/harshjain-coder/Social-Sphere-API" target="_blank">GitHub ↗</a>
+                <!-- Replace # with your deployed API URL -->
+                <a class="small-btn" href="https://social-sphere-api-y2tt.onrender.com/api/talkhub/Post" target="_blank" rel="noopener">Live API ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 3 -->
+          <article class="project-card reveal">
+            <div class="project-visual">
+              <span class="visual-label">EXPENSE TRACKER API</span>
+              <div class="dashboard">
+                <div class="dash-box">
+                  <div style="font-size:9px;color:#8f889b">TOTAL SPEND</div>
+                  <div class="dash-number"></div>
+                </div>
+                <div class="dash-box">
+                  <div style="font-size:9px;color:#8f889b">THIS MONTH</div>
+                  <div class="dash-number" style="width:48%"></div>
+                </div>
+                <div class="dash-box wide">
+                  <div style="font-size:9px;color:#8f889b">EXPENSE ACTIVITY</div>
+                  <div class="bars">
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-top">
+                <div>
+                  <h3>Expense Tracker API</h3>
+                  <div class="project-type">REST API</div>
+                </div>
+              </div>
+              <p>
+                User-specific expense management API with JWT authentication,
+                CRUD operations, category filtering, validation and error handling.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Django</span><span class="tag">DRF</span>
+                <span class="tag">PostgreSQL</span><span class="tag">Render</span>
+              </div>
+              <div class="project-links">
+                <a class="small-btn primary" href="https://github.com/harshjain-coder/Expense-Tracker-API" target="_blank" rel="noopener">GitHub ↗</a>
+                <a class="small-btn" href="https://expense-tracker-api-nmi5.onrender.com/api/expenses/" target="_blank" rel="noopener">Live API ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 4 -->
+          <article class="project-card reveal">
+            <div class="project-visual">
+              <span class="visual-label">TASK MANAGEMENT API</span>
+              <div class="kanban">
+                <div class="kanban-col">
+                  <div class="kanban-head"></div>
+                  <div class="task"><i></i><b></b></div>
+                  <div class="task"><i style="width:60%"></i><b></b></div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-head" style="width:58%"></div>
+                  <div class="task"><i style="width:70%"></i><b></b></div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-head" style="width:52%"></div>
+                  <div class="task"><i></i><b style="width:45%"></b></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-top">
+                <div>
+                  <h3>Task Management API</h3>
+                  <div class="project-type">REST API</div>
+                </div>
+              </div>
+              <p>
+                Task management backend with user-specific tasks, JWT authentication,
+                complete CRUD operations, status management and status-based filtering.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Django</span><span class="tag">DRF</span>
+                <span class="tag">PostgreSQL</span><span class="tag">Render</span>
+              </div>
+              <div class="project-links">
+                <a class="small-btn primary" href="https://github.com/harshjain-coder/Task-Management-API" target="_blank" rel="noopener">GitHub ↗</a>
+                <a class="small-btn" href="https://task-management-api-ombp.onrender.com/api/tasks/" target="_blank" rel="noopener">Live API ↗</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow no-section-dot">Education</span>
+          <h2>Computer Science foundation.</h2>
+        </div>
+
+        <div class="about-card reveal">
+          <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+            <div>
+              <h3>B.Tech — Computer Science (AI & ML)</h3>
+              <p>AKTU University, Lucknow</p>
+            </div>
+            <span class="chip">2021 — 2025</span>
+          </div>
+
+          <div class="mini-stack" style="margin-top:22px">
+            <span class="chip">Data Structures & Algorithms</span>
+            <span class="chip">DBMS</span>
+            <span class="chip">Object-Oriented Programming</span>
+            <span class="chip">Operating Systems</span>
+            <span class="chip">Computer Networks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div>
+            <span class="eyebrow no-section-dot">Let's connect</span>
+            <h2 style="margin-top:18px;">Have a backend role<br>in mind?</h2>
+            <p>
+              I’m looking for an opportunity where I can contribute to backend development,
+              keep improving my engineering fundamentals and grow with a practical product team.
+            </p>
+
+            <a class="btn btn-primary" href="mailto:harshjain1403@gmail.com">Send me an email →</a>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:harshjain1403@gmail.com">
+              <span class="contact-icon">@</span>
+              <span>harshjain1403@gmail.com</span>
+            </a>
+            <a class="contact-item" href="https://linkedin.com/in/harshjain1403" target="_blank">
+              <span class="contact-icon">in</span>
+              <span>linkedin.com/in/harshjain1403</span>
+            </a>
+            <a class="contact-item" href="https://github.com/harshjain-coder" target="_blank">
+              <span class="contact-icon">GH</span>
+              <span>github.com/harshjain-coder</span>
+            </a>
+            <div class="contact-item">
+              <span class="contact-icon">IN</span>
+              <span>Delhi, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Harsh Jain · Built with HTML, CSS & JavaScript
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // Current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Temporary helper for project links that still need real URLs
+    function liveApi(event, message) {
+      event.preventDefault();
+      alert(message);
+      return false;
+    }
+  </script>
+</body>
+</html>
